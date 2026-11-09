@@ -29,7 +29,7 @@ public class Main {
 
                         Object[] mensaje = {"Nombre: ", campoNombre, "Apellido: " , campoApellido, "Número:" , campoNumero};
 
-                        int respuesta = JOptionPane.showConfirmDialog(null, mensaje, "Agregar estudiante", JOptionPane.OK_CANCEL_OPTION);
+                        int respuesta = JOptionPane.showConfirmDialog(null, mensaje, "Agregar usuario", JOptionPane.OK_CANCEL_OPTION);
 
                         if (respuesta == JOptionPane.OK_OPTION) {
 
@@ -43,7 +43,8 @@ public class Main {
                                 JOptionPane.showMessageDialog(null, "El apellido no puede estar vacío.");
                             } else if(numero.isEmpty()){
                                 JOptionPane.showMessageDialog(null, "El número no puede estar vacío.");
-                            } else {
+                            } else {Contacto c =new Contacto(nombre,apellido,numero);
+                                agenda.anadirContacto(c);
 
                             }
 
@@ -57,6 +58,62 @@ public class Main {
                     break;
 
                 case "Buscar contacto":
+
+                    break;
+                case "Modificar contacto":
+                    Agenda miAgenda = new Agenda();
+
+                    // Pedir nombre y apellido
+                    String nombre = JOptionPane.showInputDialog("Ingrese el nombre del contacto a modificar:");
+                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del contacto:");
+
+                    // Validar inmediatamente si el usuario presionó "Cancelar"
+                    if (nombre == null || apellido == null) {
+                        JOptionPane.showMessageDialog(null, "Operación cancelada por el usuario.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    } else {
+
+                        // Limpiar espacios en blanco
+                        nombre = nombre.trim();
+                        apellido = apellido.trim();
+
+                        Contacto contactoBuscar = new Contacto(nombre, apellido, "");
+
+                        // Validar si existe en la agenda
+                        if (miAgenda.existeContacto(contactoBuscar)) {
+
+                            // SOLO si existe, pedimos el nuevo teléfono
+                            String nuevoTelefono = JOptionPane.showInputDialog("Ingrese el nuevo número de teléfono:");
+
+                            // Validar que no haya cancelado en este paso también
+                            if (nuevoTelefono != null) {
+                                nuevoTelefono = nuevoTelefono.trim();
+
+                                // Llamar al metodo modificar contacto
+                                miAgenda.modificarTelefono(nombre, apellido, nuevoTelefono);
+
+                                // Mensaje de éxito
+                                JOptionPane.showMessageDialog(
+                                        null,
+                                        "Teléfono modificado correctamente.",
+                                        "Éxito",
+                                        JOptionPane.INFORMATION_MESSAGE
+                                );
+
+                            } else {
+                                // El usuario canceló al pedir el teléfono
+                                JOptionPane.showMessageDialog(null, "Operación cancelada por el usuario.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                            }
+
+                        } else {
+                            // Si NO existe, mostramos el error y NO pedimos el teléfono
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "El contacto " + nombre + " " + apellido + " no existe en la agenda.",
+                                    "Contacto no encontrado",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    }
 
                     break;
 

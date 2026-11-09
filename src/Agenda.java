@@ -24,12 +24,25 @@ public class Agenda {
         return espacioLibres() == 0;
     }
 
-    //Metodo para añadir un contacto nuevo
-    public void añadirContacto(Contacto c){
+    //Metodo para añadir un contacto nuevo / Realizado por Elizabeth Candelario
+    public void anadirContacto(Contacto c){
+        if(existeContacto(c)){
+            return;
+        }
 
+        if(agendaLlena()){
+            return;
+        }
+
+        for(int i=0 ; i< contactos.length; i++){
+            if(contactos[i] ==null){
+                contactos[i]=c;
+                break;
+            }
+        }
     }
 
-    //Metodo para listar todos los contactos
+    //Metodo para listar todos los contactos / Realizado por Elizabeth Candelario
     public Contacto[] contactos(){
         return contactos;
     }
@@ -58,6 +71,18 @@ public class Agenda {
 
     //Metodo para modificar número de un contacto
     public void modificarTelefono(String nombre, String apellido, String nuevoTelefono){
+
+        for (Contacto contacto : contactos){
+            //verificar que no este vacio o null y coincidan con nmbre y apellido
+            if (contacto != null && contacto.getNombre().equals(nombre) &&
+                contacto.getApellido().equals(apellido)){
+
+                //actualizar el numero
+                contacto.setNumero(nuevoTelefono);
+                System.out.println("telefono modificado exitosamente");
+                return;
+            }
+        }
 
     }
 
