@@ -29,7 +29,7 @@ public class Main {
 
                         Object[] mensaje = {"Nombre: ", campoNombre, "Apellido: " , campoApellido, "Número:" , campoNumero};
 
-                        int respuesta = JOptionPane.showConfirmDialog(null, mensaje, "Agregar estudiante", JOptionPane.OK_CANCEL_OPTION);
+                        int respuesta = JOptionPane.showConfirmDialog(null, mensaje, "Agregar usuario", JOptionPane.OK_CANCEL_OPTION);
 
                         if (respuesta == JOptionPane.OK_OPTION) {
 
@@ -43,7 +43,8 @@ public class Main {
                                 JOptionPane.showMessageDialog(null, "El apellido no puede estar vacío.");
                             } else if(numero.isEmpty()){
                                 JOptionPane.showMessageDialog(null, "El número no puede estar vacío.");
-                            } else {
+                            } else {Contacto c =new Contacto(nombre,apellido,numero);
+                                agenda.anadirContacto(c);
 
                             }
 
