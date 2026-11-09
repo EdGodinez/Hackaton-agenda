@@ -123,6 +123,64 @@ public class Main {
 
                 case "Eliminar contacto":
 
+                    String nombre = JOptionPane.showInputDialog("Ingrese el nombre del contacto a eliminar:");
+                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del contacto:");
+
+                    //validar cancelacion inmediata
+                    if (nombre == null || apellido == null) {
+                        JOptionPane.showMessageDialog(null, "Operación cancelada por el usuario.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    } else {
+
+                        // Limpiar datos
+                        nombre = nombre.trim();
+                        apellido = apellido.trim();
+
+                        // Crear objeto temporal para validar existencia
+                        Contacto contactoBuscar = new Contacto(nombre, apellido, "");
+
+                        Agenda miAgenda = new Agenda();
+                        // Validar si existe
+                        if (miAgenda.existeContacto(contactoBuscar)) {
+
+                            // Pedir confirmación antes de borrar
+                            int confirmacion = JOptionPane.showConfirmDialog(
+                                    null,
+                                    "¿Está seguro de que desea eliminar a " + nombre + " " + apellido + "?",
+                                    "Confirmar eliminación",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.WARNING_MESSAGE
+                            );
+
+                            // Si el usuario presiona "Sí" (YES_OPTION)
+                            if (confirmacion == JOptionPane.YES_OPTION) {
+
+                                // Llamar al metodo
+                                boolean eliminado = miAgenda.eliminarContacto(nombre, apellido);
+
+                                if (eliminado) {
+                                    JOptionPane.showMessageDialog(
+                                            null,
+                                            "El contacto ha sido eliminado correctamente.",
+                                            "Éxito",
+                                            JOptionPane.INFORMATION_MESSAGE
+                                    );
+                                }
+                            } else {
+                                // El usuario presionó "No" o cerró la ventana de confirmación
+                                JOptionPane.showMessageDialog(null, "Eliminación cancelada.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                            }
+
+                        } else {
+                            // Si NO existe, mostrar error (sin pedir confirmación)
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "El contacto " + nombre + " " + apellido + " no existe en la agenda.",
+                                    "Contacto no encontrado",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    }
+
                     break;
 
                 case "Salir":

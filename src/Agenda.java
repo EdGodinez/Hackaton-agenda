@@ -53,9 +53,20 @@ public class Agenda {
     }
 
     //Metodo para eliminar un contacto
-    public void eliminarContacto(Contacto c){
+    // Devuelve true si lo eliminó, false si no lo encontró
+    public boolean eliminarContacto(String nombre, String apellido) {
+        for (int i = 0; i < contactos.length; i++) {
+            //si nombre y apellido son iguales a los que se insertaron
+            if (contactos[i] != null &&
+                    contactos[i].getNombre().equals(nombre) &&
+                    contactos[i].getApellido().equals(apellido)) {
 
-
+                // borra el contacto dejando el espacio en null
+                contactos[i] = null;
+                return true; // Éxito
+            }
+        }
+        return false; // No se encontró
     }
 
     //Metodo para modificar número de un contacto
