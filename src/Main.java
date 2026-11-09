@@ -54,6 +54,18 @@ public class Main {
                     break;
 
                 case "Mostrar todos los contactos":
+                    Contacto[] lista = agenda.contactos();
+                    String listaC = "";
+
+                    for (int i = 0; i < lista.length; i++) {
+                        if ( lista [i] !=null){
+                            listaC += "Nombre: " + lista[i].getNombre()
+                                    + " Apellido: " + lista[i].getApellido()
+                                    + " Número: " + lista[i].getNumero()
+                                    + "\n";
+                        }
+                    }
+                    JOptionPane.showMessageDialog(null, listaC);
 
                     break;
 
