@@ -1,13 +1,10 @@
 public class Agenda {
 
     private Contacto[] contactos;
-    private int capacidadMaxima = 10;
-    private int totalContactos;
 
     public Agenda() {
-        this.contactos = contactos;
-        this.capacidadMaxima = capacidadMaxima;
-        this.totalContactos = totalContactos;
+        this.contactos = new Contacto[10];
+
     }
 
     //Funcioon para verificar si un contacto existe | Realizado por Eduardo Godinez
@@ -24,7 +21,7 @@ public class Agenda {
     }
 
     public Boolean agendaLlena(){
-        return (espacioLibres() >= this.capacidadMaxima);
+        return espacioLibres() == 0;
     }
 
     //Metodo para añadir un contacto nuevo
@@ -54,7 +51,15 @@ public class Agenda {
 
     //Metodo para mostrar cuantos espacios libres hay
     public int espacioLibres(){
-        return 10;
+
+        int espacios = 0;
+
+        for(Contacto c : contactos){
+            if(c == null){
+                espacios++;
+            }
+        }
+        return espacios;
     }
 
 }
