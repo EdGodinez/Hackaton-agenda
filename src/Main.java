@@ -1,6 +1,77 @@
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
 
-        
+
+        Agenda agenda = new Agenda();
+
+        String[] opciones = {"Agregar contacto",
+                "Mostrar todos los contactos",
+                "Buscar contacto",
+                "Modificar contacto",
+                "Verificar espacios libres",
+                "Eliminar contacto",
+                "Salir"
+        };
+
+        String opcion = "";
+
+        while(!opcion.equals("Salir")){
+            opcion = (String) JOptionPane.showInputDialog(null, "Seleccione una opcion", "Ménu principal", JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+
+            switch (opcion) {
+
+                case "Agregar contacto":
+                        JTextField campoNombre = new JTextField();
+                        JTextField campoApellido = new JTextField();
+                        JTextField campoNumero = new JTextField();
+
+                        Object[] mensaje = {"Nombre: ", campoNombre, "Apellido: " , campoApellido, "Número:" , campoNumero};
+
+                        int respuesta = JOptionPane.showConfirmDialog(null, mensaje, "Agregar estudiante", JOptionPane.OK_CANCEL_OPTION);
+
+                        if (respuesta == JOptionPane.OK_OPTION) {
+
+                            String nombre = campoNombre.getText().trim();
+                            String apellido = campoApellido.getText().trim();
+                            String numero = campoNumero.getText().trim();
+
+                            if(nombre.isEmpty()){
+                                JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío.");
+                            } else if(apellido.isEmpty()){
+                                JOptionPane.showMessageDialog(null, "El apellido no puede estar vacío.");
+                            } else if(numero.isEmpty()){
+                                JOptionPane.showMessageDialog(null, "El número no puede estar vacío.");
+                            } else {
+
+                            }
+
+
+                        }
+
+                    break;
+
+                case "Mostrar todos los contactos":
+
+                    break;
+
+                case "Buscar contacto":
+
+                    break;
+
+                case "Verificar espacios libres":
+                        JOptionPane.showMessageDialog(null,"A la genda le quedan: " + agenda.espacioLibres() + " libres.");
+                    break;
+
+                case "Eliminar contacto":
+
+                    break;
+
+                case "Salir":
+                    JOptionPane.showMessageDialog(null, "Bye!");
+                    break;
+            }
+        }
     }
 }
