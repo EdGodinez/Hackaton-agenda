@@ -35,8 +35,17 @@ public class Agenda {
     }
 
     //Metodo para buscar un contacto en especifico
-    public void buscarContacto(String nombre){
-
+    public Contacto buscarContacto(String nombre, String apellido) {
+        for (int i = 0; i < contactos.length; i++) {
+            Contacto c = contactos[i];
+            if (c != null) {
+                if (c.getNombre().equalsIgnoreCase(nombre)
+                && c.getApellido().equalsIgnoreCase(apellido)) {
+                    return c;
+                }
+            }
+        }
+    return null;
     }
 
     //Metodo para eliminar un contacto
