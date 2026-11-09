@@ -55,10 +55,23 @@ public class Agenda {
     //Metodo para eliminar un contacto
     public void eliminarContacto(Contacto c){
 
+
     }
 
     //Metodo para modificar número de un contacto
     public void modificarTelefono(String nombre, String apellido, String nuevoTelefono){
+
+        for (Contacto contacto : contactos){
+            //verificar que no este vacio o null y coincidan con nmbre y apellido
+            if (contacto != null && contacto.getNombre().equals(nombre) &&
+                contacto.getApellido().equals(apellido)){
+
+                //actualizar el numero
+                contacto.setNumero(nuevoTelefono);
+                System.out.println("telefono modificado exitosamente");
+                return;
+            }
+        }
 
     }
 
