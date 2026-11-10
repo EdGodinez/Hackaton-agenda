@@ -24,28 +24,74 @@ public class Agenda {
         return espacioLibres() == 0;
     }
 
-    //Metodo para añadir un contacto nuevo
-    public void añadirContacto(Contacto c){
+    //Metodo para añadir un contacto nuevo / Realizado por Elizabeth Candelario
+    public void anadirContacto(Contacto c){
+        if(existeContacto(c)){
+            return;
+        }
 
+        if(agendaLlena()){
+            return;
+        }
+
+        for(int i=0 ; i< contactos.length; i++){
+            if(contactos[i] ==null){
+                contactos[i]=c;
+                break;
+            }
+        }
     }
 
-    //Metodo para listar todos los contactos
+    //Metodo para listar todos los contactos / Realizado por Elizabeth Candelario
     public Contacto[] contactos(){
         return contactos;
     }
 
     //Metodo para buscar un contacto en especifico
-    public void buscarContacto(String nombre){
-
+    public Contacto buscarContacto(String nombre, String apellido) {
+        for (int i = 0; i < contactos.length; i++) {
+            Contacto c = contactos[i];
+            if (c != null) {
+                if (c.getNombre().equalsIgnoreCase(nombre)
+                && c.getApellido().equalsIgnoreCase(apellido)) {
+                    return c;
+                }
+            }
+        }
+    return null;
     }
 
     //Metodo para eliminar un contacto
-    public void eliminarContacto(Contacto c){
+    // Devuelve true si lo eliminó, false si no lo encontró
+    public boolean eliminarContacto(String nombre, String apellido) {
+        for (int i = 0; i < contactos.length; i++) {
+            //si nombre y apellido son iguales a los que se insertaron
+            if (contactos[i] != null &&
+                    contactos[i].getNombre().equals(nombre) &&
+                    contactos[i].getApellido().equals(apellido)) {
 
+                // borra el contacto dejando el espacio en null
+                contactos[i] = null;
+                return true; // Éxito
+            }
+        }
+        return false; // No se encontró
     }
 
     //Metodo para modificar número de un contacto
     public void modificarTelefono(String nombre, String apellido, String nuevoTelefono){
+
+        for (Contacto contacto : contactos){
+            //verificar que no este vacio o null y coincidan con nmbre y apellido
+            if (contacto != null && contacto.getNombre().equals(nombre) &&
+                contacto.getApellido().equals(apellido)){
+
+                //actualizar el numero
+                contacto.setNumero(nuevoTelefono);
+                System.out.println("telefono modificado exitosamente");
+                return;
+            }
+        }
 
     }
 
